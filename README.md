@@ -20,7 +20,7 @@
 # PHẦN B: CÀI ĐẶT UBUNTU & DOCKER
 
 ### 1. Thông tin hệ thống
-- Hệ điều hành: Ubuntu 24.04 LTS (Cài trực tiếp trên ổ cứng).
+- Hệ điều hành: Ubuntu 24.04 LTS 
 - IP máy chủ: `192.168.x.x`
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/5ecbccab-c221-4ff9-88e3-fdd7f793ac29" />
 
