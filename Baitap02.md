@@ -24,7 +24,7 @@ quan_ly_cam_do/
 │   └── requirements.txt  # Thư viện Python
 └── docker-compose.yml    # File điều phối MariaDB, PhpMyAdmin, Django
 
-<img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/668ad462-8047-432a-8faa-c8351473ee12" />
+<img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/3e5a7015-417f-4504-80b7-1b1dcaf20bd9" />
 
 <img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/62e17266-9ae6-4c1e-8400-d2f3f36d815f" />
 
@@ -61,7 +61,7 @@ sudo nano pawnshop/admin.py
 <img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/fe9358c1-b79b-4eba-bd93-a0f04a09b2d3" />
 
 Chạy lệnh cập nhật
-<img width="1390" height="199" alt="image" src="https://github.com/user-attachments/assets/fc558b7b-69ee-46a3-a599-0a2e73c643f0" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/5ddf4027-0377-490f-a990-cee39d4c80bc" />
 
 Tạo View liệt kê "Con nợ" (Views.py)
 <img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/23035215-0669-4d9a-8ff0-8f971d1d8fed" />
@@ -69,12 +69,22 @@ Tạo View liệt kê "Con nợ" (Views.py)
 Tạo giao diện
 <img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/103a7a88-99e0-4a36-a1e5-82bafcea1b7b" />
 
+<img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/40a91dcd-9da0-42ce-a49e-702f27261e43" />
 
 
 
 🚀 4. KẾT QUẢ THỰC HIỆN (HÌNH ẢNH CHI TIẾT)
 ✅ Trang Quản trị Django (Admin)
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/38583b59-f8ca-4c01-8453-ec54c4e318e2" />
+
 Hệ thống cho phép quản lý thêm, sửa, xóa. Các trường khóa ngoại (FK) hiển thị tên khách hàng để dễ lựa chọn.
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/5120dcba-e2e6-4e36-8cbe-4a6b844fc88f" />
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/059c2053-7ec3-4e7f-8c70-b7af05166627" />
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/d50a8ccd-b7fb-4e0b-8040-65415ad1b958" />
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/b32059b9-0334-421f-a2a8-5c9576983663" />
 
 (Ghi chú: Chụp ảnh trang Admin thêm mới hợp đồng)
 
