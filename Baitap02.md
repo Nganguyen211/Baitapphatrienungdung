@@ -177,7 +177,25 @@ Trang chủ hiển thị danh sách các "con nợ" đến hạn hoặc quá h�
 
 <img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/91e1d082-ce7a-4fe9-a983-eb738c8033a2" />
 
-🌐 5. PUBLIC QUA CLOUDFLARE TUNNEL
+# 5. PUBLIC QUA CLOUDFLARE TUNNEL
+
 Sử dụng Cloudflare Tunnel để đưa kết quả bài tập lên một sub-domain công khai.
 
-(Ghi chú: Chụp ảnh trình duyệt hiển thị website của bạn chạy bằng link cloudflare)
+Tải và cài đặt Cloudflared
+
+Bash
+
+wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+
+Chạy lệnh lấy link Public
+
+Bash
+
+cloudflared tunnel --url http://localhost:8000
+
+<img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/3f60f846-f3b6-46ea-8241-9f7c59b0c0ca" />
+
+Link công khai :https://covered-grew-pete-galleries.trycloudflare.com
+
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8a1daac8-445a-4404-ba29-57d180fecce2" />
+
