@@ -113,17 +113,69 @@ Hệ thống cho phép quản lý thêm, sửa, xóa. Các trường khóa ngo�
 
 <img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/b32059b9-0334-421f-a2a8-5c9576983663" />
 
-(Ghi chú: Chụp ảnh trang Admin thêm mới hợp đồng)
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/f83d29c1-d1a8-4502-8856-4f6d632d2d00" />
+
+<img width="1920" height="1020" alt="Screenshot 2026-05-09 200626" src="https://github.com/user-attachments/assets/2ecc8a20-f361-41ae-988c-e8c93508c97c" />
 
 ✅ Kiểm chứng CSDL qua PhpMyAdmin
+
 Tôi sử dụng PhpMyAdmin để "soi" dữ liệu thực tế lưu trong MariaDB do Django tạo ra.
 
-(Ghi chú: Chụp màn hình danh sách các bảng trong PhpMyAdmin)
+sudo nano django_app/core/settings.py và thay thế đoạn DATABASES cũ bằng đoạn này:
+
+Python
+
+DATABASES = {
+
+    'default': {
+    
+        'ENGINE': 'django.db.backends.mysql',
+        
+        'NAME': 'db_cam_do',        # Khớp với MARIADB_DATABASE
+
+        'USER': 'user_nga',         # Khớp với MARIADB_USER
+        
+        'PASSWORD': 'password_nga', # Khớp với MARIADB_PASSWORD
+        
+        'HOST': 'db',               # Tên service MariaDB của Nga
+        
+        'PORT': '3306',
+        
+    }
+    
+}
+
+Sau đó Nga chạy các lệnh này để hoàn tất:
+
+Cài đặt thư viện kết nối (nếu chưa có):
+
+sudo docker-compose exec web pip install mysqlclient
+
+Đẩy bảng sang MariaDB:
+
+sudo docker-compose exec web python manage.py migrate
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/5d7454fc-5cae-40f1-a280-d2e1308b104b" />
 
 ✅ Danh sách khách nợ đến hạn (Jinja2)
+
+Cấu hình URL
+
+Mở django_app/core/urls.py và thêm đường dẫn:
+
+from pawnshop.views import home_page
+
+urlpatterns = [
+
+    path('admin/', admin.site.urls),
+    
+    path('', home_page, name='home'), # Trang chủ
+    
+]
+
 Trang chủ hiển thị danh sách các "con nợ" đến hạn hoặc quá hạn trả tiền dựa trên logic trong View.
 
-(Ghi chú: Chụp màn hình trang liệt kê con nợ trên trình duyệt)
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/91e1d082-ce7a-4fe9-a983-eb738c8033a2" />
 
 🌐 5. PUBLIC QUA CLOUDFLARE TUNNEL
 Sử dụng Cloudflare Tunnel để đưa kết quả bài tập lên một sub-domain công khai.
