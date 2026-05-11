@@ -196,5 +196,6 @@ cloudflared tunnel run --url http://localhost:8000 hangnga-tunne
 <img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/df2d9d09-1baf-47b1-9657-de05792a1afa" />
 
 
-<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/affe90cb-e03b-44d5-959b-09b42223c49d" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/884cac63-6a6a-45d5-9fa1-9fa79dbe4a52" />
+
 
