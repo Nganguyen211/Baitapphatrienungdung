@@ -187,15 +187,14 @@ Bash
 
 wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
 
-Chạy lệnh lấy link Public
+Chạy lệnh Public Website (Kết nối Tunnel)
 
 Bash
 
-cloudflared tunnel --url http://localhost:8000
+cloudflared tunnel run --url http://localhost:8000 hangnga-tunne
 
-<img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/3f60f846-f3b6-46ea-8241-9f7c59b0c0ca" />
+<img width="1483" height="762" alt="image" src="https://github.com/user-attachments/assets/df2d9d09-1baf-47b1-9657-de05792a1afa" />
 
-Link công khai :https://covered-grew-pete-galleries.trycloudflare.com
 
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/8a1daac8-445a-4404-ba29-57d180fecce2" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/affe90cb-e03b-44d5-959b-09b42223c49d" />
 
