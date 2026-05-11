@@ -29,18 +29,21 @@ mkdir wordpress-docker
 
 cd wordpress-docker
 
-(Chèn ảnh)
-
----
-
 ## 2. Tạo file docker-compose.yml
 
 Lệnh 
+
 nano docker-compose.yml
-(Chèn ảnh)
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/45d93bd0-bbe1-4784-a9e1-abeedd7dbb09" />
+
 
 ---
 sudo docker compose up -d
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/b421f31f-d7f6-452a-9c55-2bfb616e5270" />
+
+
 
 sudo docker ps
 
