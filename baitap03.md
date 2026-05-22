@@ -1,4 +1,4 @@
-# BÁO CÁO BÀI TẬP: HỆ THỐNG QUẢN LÝ TIỆM CẦM ĐỒ
+# BÁO CÁO BÀI TẬP: HỆ THỐNG VIẾT TRANG WEB
 
 **Sinh viên thực hiện:** Nguyễn Thị Hằng Nga
 
