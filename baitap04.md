@@ -155,7 +155,8 @@ Hệ thống ghi nhận chuỗi sự kiện được kích hoạt tự động h
 
 <img width="1170" height="2532" alt="image" src="https://github.com/user-attachments/assets/aa21494f-e33e-4f92-a74e-dcdec80c67ba" />
 
-<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/73be036c-c8a1-432c-a837-a2bc297fac72" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/4d335872-9c3c-4aba-8bfb-b0ecd98aa59f" />
+
 
 
 [ DÁN ẢNH MÀN HÌNH BÀI VIẾT ĐÃ LÊN SÓNG TỰ ĐỘNG TRÊN WEB WORDPRESS TẠI ĐÂY ]
