@@ -149,17 +149,16 @@ Bấm nút chọn Add Field, cấu hình thuộc tính trạng thái xuất bả
 ## 4. Kiểm thử vận hành thực tế hệ thống tự động hóa
 Tiến hành nhấn nút Publish kích hoạt trạng thái chạy ngầm thực tế cho Workflow trên n8n.
 
-Thực hiện nhắn tin từ ứng dụng Telegram trên thiết bị di động đến tài khoản Bot với nội dung yêu cầu bài viết: "Viết một bài giới thiệu về các lợi ích nổi bật của việc ứng dụng mã nguồn mở trong doanh nghiệp công nghệ thông tin hiện nay".
+Thực hiện nhắn tin từ ứng dụng Telegram trên thiết bị di động đến tài khoản Bot với nội dung yêu cầu bài viết: "Viết một bài 500 chữ về tình yêu thời sinh viên "
 
 Hệ thống ghi nhận chuỗi sự kiện được kích hoạt tự động hóa tuần tự qua các node. Truy cập giao diện trang chủ https://web.hangnga23.io.vn và thực hiện F5 tải lại trang, ghi nhận bài viết mới xuất bản thành công với tiêu đề tự động và nội dung bao gồm mã nhúng HTML/CSS giao diện đẹp mắt.
 
-<img width="1170" height="2532" alt="image" src="https://github.com/user-attachments/assets/aa21494f-e33e-4f92-a74e-dcdec80c67ba" />
+<img width="1170" height="2532" alt="image" src="https://github.com/user-attachments/assets/2e716d3e-d6af-4bc6-b31c-758c3222bf77" />
 
-<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/4d335872-9c3c-4aba-8bfb-b0ecd98aa59f" />
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/5e126f19-ec2b-401a-9e4b-fe736b40576c" />
 
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/7909d499-1d67-44bd-9b07-74b492dc40cd" />
 
-
-[ DÁN ẢNH MÀN HÌNH BÀI VIẾT ĐÃ LÊN SÓNG TỰ ĐỘNG TRÊN WEB WORDPRESS TẠI ĐÂY ]
 
 ## 5. Đánh giá và nhận xét thành quả đạt được
 ### 5.1. Ưu điểm nổi bật của kiến trúc hệ thống
