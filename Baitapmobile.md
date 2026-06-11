@@ -166,13 +166,20 @@ Cú pháp truy cập trong Java: InputStream is = getAssets().open("ten_file.txt
 
 Lợi ích: Dữ liệu nằm sẵn trong máy nên không có mạng (Offline) vẫn chạy mượt mà, tốc độ load cực nhanh.
 
-## III. THỰC HÀNH SÁNG TẠO: APP 1 (Dữ liệu Offline từ Assets)
+## III. THỰC HÀNH SÁNG TẠO:
+### APP 1 (Dữ liệu Offline từ Assets)
 ### 1. Sinh viên tự đặt ra vấn đề và giải quyết
 
 Bài toán: Xây dựng ứng dụng "Cẩm nang tra cứu số điện thoại của sinh viên trường TNUT dành cho sinh viên 58KTP".
 
 Đặc thù dữ liệu: Dữ liệu được cấu trúc dưới dạng file văn bản danhba_tnut.txt cất trong thư mục assets. Mỗi dòng chứa thông tin: Tên Sinh viên - Số Điện Thoại.
-
+```
+Nguyễn Thị Hằng Nga - 0912345678
+Trần Văn Anh - 0987654321
+Lê Hoàng Hải - 0905112233
+Phạm Minh Đức - 0977889900
+Vũ Thùy Linh - 0944556677
+```
 Thuật toán xử lý: Khi App mở lên, Java sẽ đọc file từ thư mục assets, sử dụng thuật toán cắt chuỗi (hàm split("-")) để phân tách tên và số điện thoại riêng ra.
 
 Đối tượng hiển thị: Dùng ListView (hoặc RecyclerView) để hiển thị danh sách dạng danh bạ lên màn hình gọn gàng.
@@ -301,3 +308,352 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 ```
+<img width="1733" height="962" alt="image" src="https://github.com/user-attachments/assets/8ee37f1e-8339-47e8-92a5-1ba306005515" />
+
+Do thiết bị cá nhân chạy hệ điều hành iOS (iPhone) không thể kết nối trực tiếp với môi trường Android Studio, đồng thời máy tính bị giới hạn dung lượng bộ nhớ ổ đĩa để khởi chạy trình giả lập tích hợp (AVD), em đã sử dụng giải pháp Xuất file APK độc lập và kiểm thử qua nền tảng đám mây trực tuyến (Appetize.io). Quy trình triển khai gồm 3 bước:
+
+Bước 1 (Đóng gói ứng dụng): Trên thanh công cụ Android Studio, truy cập vào menu Build ➔ Chọn Generate App Bundles or APKs ➔ Tích chọn mục APK để ép hệ thống biên dịch toàn bộ mã nguồn Java/XML thành file cài đặt app-debug.apk.
+
+Bước 2 (Khai thác file sản phẩm): Sau khi hệ thống báo BUILD SUCCESSFUL, truy cập vào thư mục đầu ra của dự án theo đường dẫn cục bộ: D:\BaiTapLonMobile\app\build\outputs\apk\debug\ để trích xuất file app-debug.apk.
+
+Bước 3 (Kiểm thử trực tuyến): Tải file APK đã đóng gói lên máy chủ mô phỏng đám mây Appetize.io. Hệ thống ảo hóa sẽ khởi tạo một thiết bị Android ảo chạy trực tuyến ngay trên trình duyệt web, cho phép kích hoạt và kiểm thử toàn bộ giao diện danh bạ sinh viên lớp 58KTP hoàn
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/40a1030b-d3bc-4f93-80e0-303846410c95" />
+### APP 2 Giao diện như mitapp
+
+# BƯỚC 1: KHAI BÁO THƯ VIỆN & CẤP QUYỀN INTERNET 
+Vì App 2 cần gọi API gửi kết quả toán lên Server và dùng WebView tải trang web, bạn bắt buộc phải cấp quyền Internet.Cấp quyền Internet: Mở file app ➔ manifests ➔ AndroidManifest.xml. Thêm dòng sau vào ngay phía trên thẻ <application>:
+```XML
+<uses-permission android:name="android.permission.INTERNET" />
+```
+Thêm thư viện Volley (Gọi API): Nhìn xuống mục Gradle Scripts ở cây thư mục bên trái ➔ Mở file build.gradle.kts (Module :app).Tìm đến đoạn dependencies { ... } ở gần cuối file, dán thêm dòng này vào bên trong:Kotlinimplementation("com.android.volley:volley:1.2.1")
+
+Sau khi dán xong, nhìn lên góc trên cùng bên phải màn hình sẽ hiện một thanh thông báo nhỏ, bấm nút Sync Now để tải thư viện về.
+# BƯỚC 2: TẠO THÊM CÁC ACTIVITY MỚIHiện tại dự án mới chỉ có MainActivity (ta sẽ dùng làm Màn hình 1: About). 
+Cần tạo thêm 2 Activity nữa:Tạo Activity 2 (Giải toán): Nhấp chuột phải vào thư mục gói code chính com.example.baitaplonmobile ➔ Chọn New ➔ Activity ➔ Empty Views Activity. Đặt tên là GiaiToanActivity rồi bấm Finish.Tạo Activity 3 (WebView): Nhấp chuột phải tiếp vào com.example.baitaplonmobile ➔ Chọn New ➔ Activity ➔ Empty Views Activity. Đặt tên là WebViewActivity rồi bấm Finish.
+# BƯỚC 3: THIẾT KẾ GIAO DIỆN XML VÀ CODE JAVA CHO TỪNG MÀN HÌNH
+## MÀN HÌNH 1: GIỚI THIỆU (About)Màn hình này hiển thị thông tin cá nhân của bạn và có 2 nút bấm để chuyển sang 2 màn hình còn lại.File giao diện (activity_main.xml): Xóa code cũ của App 1 đi, dán đoạn code này vào:
+```XML
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp"
+    android:background="#F5F5F5">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="THÔNG TIN SINH VIÊN"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#0055A5"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Họ và tên: Nguyễn Thị Hằng Nga\nMã số SV: (Nhập MSV của bạn vào đây)\nLớp: 58KTPM\nTrường: ĐH Kỹ thuật Công nghiệp Thái Nguyên"
+        android:textSize="16sp"
+        android:lineSpacingMultiplier="1.3"
+        android:layout_marginBottom="40dp" />
+
+    <Button
+        android:id="@+id/btnSangGiaiToan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chuyển sang Giải Toán &amp; Gọi API"
+        android:backgroundTint="#0055A5"
+        android:layout_marginBottom="15dp" />
+
+    <Button
+        android:id="@+id/btnSangWebView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Chuyển sang Xem Trang Web"
+        android:backgroundTint="#2E7D32" />
+</LinearLayout>
+```
+File xử lý (MainActivity.java): Sửa lại để làm nhiệm vụ chuyển màn hình bằng Intent:Javapackage com.example.baitaplonmobile;
+```
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Button btnSangGiaiToan = findViewById(R.id.btnSangGiaiToan);
+        Button btnSangWebView = findViewById(R.id.btnSangWebView);
+
+        btnSangGiaiToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GiaiToanActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnSangWebView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WebViewActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+}
+```
+## MÀN HÌNH 2: GIẢI TOÁN & GỌI API BÁO CÁO SERVER
+Màn hình này sẽ giải phương trình bậc nhất ax + b = 0. Sau khi giải xong, ứng dụng tự động đóng gói dữ liệu JSON theo đúng cấu trúc và gửi lên Server bằng phương thức POST.File giao diện (activity_giai_toan.xml): Mở file này trong mục res/layout và dán code:
+```
+XML<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="GIẢI PHƯƠNG TRÌNH: ax + b = 0"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"/>
+
+    <EditText
+        android:id="@+id/edtA"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập hệ số a"
+        android:inputType="numberDecimal|numberSigned" />
+
+    <EditText
+        android:id="@+id/edtB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nhập hệ số b"
+        android:inputType="numberDecimal|numberSigned"
+        android:layout_marginBottom="20dp"/>
+
+    <Button
+        android:id="@+id/btnGiai"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Giải và Gửi API Lên Server" />
+
+    <TextView
+        android:id="@+id/txtKetQua"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kết quả hiển thị tại đây"
+        android:textSize="16sp"
+        android:textColor="#FF5722"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"/>
+</LinearLayout>
+```
+File xử lý (GiaiToanActivity.java):  .Javapackage com.example.baitaplonmobile;
+```
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class GiaiToanActivity extends AppCompatActivity {
+
+    private EditText edtA, edtB;
+    private Button btnGiai;
+    private TextView txtKetQua;
+    private final String MA_SV = "K225480106050"; // Hãy điền mã số sinh viên thật của bạn vào đây
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_giai_toan);
+
+        edtA = findViewById(R.id.edtA);
+        edtB = findViewById(R.id.edtB);
+        btnGiai = findViewById(R.id.btnGiai);
+        txtKetQua = findViewById(R.id.txtKetQua);
+
+        btnGiai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                thựcThiGiảiToánVàGửiAPI();
+            }
+        });
+    }
+
+    private void thựcThiGiảiToánVàGửiAPI() {
+        String strA = edtA.getText().toString().trim();
+        String strB = edtB.getText().toString().trim();
+
+        if (strA.isEmpty() || strB.isEmpty()) {
+            Toast.makeText(this, "Vui lòng nhập đầy đủ hệ số a và b!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        double a = Double.parseDouble(strA);
+        double b = Double.parseDouble(strB);
+        String ketLuan = "";
+        double nghiem = 0.0;
+
+        // Thuật toán giải toán đơn giản ax + b = 0
+        if (a == 0) {
+            if (b == 0) {
+                ketLuan = "Vô số nghiệm";
+            } else {
+                ketLuan = "Vô nghiệm";
+            }
+        } else {
+            ketLuan = "Có 1 nghiệm duy nhất";
+            nghiem = -b / a;
+        }
+
+        txtKetQua.setText("Kết luận: " + ketLuan + (a != 0 ? "\nNghiệm x = " + nghiem : ""));
+
+        // Tiến hành đóng gói đối tượng JSON theo định dạng chuẩn yêu cầu của Server bộ môn
+        try {
+            JSONObject jsonGoc = new JSONObject();
+            jsonGoc.put("app_by", MA_SV);
+
+            // Nhóm dữ liệu đầu vào (input)
+            JSONObject jsonInput = new JSONObject();
+            jsonInput.put("a", a);
+            jsonInput.put("b", b);
+            jsonInput.put("c", 0); // Thừa hành tham số c theo định dạng cấu trúc mẫu
+            jsonInput.put("name", "hello tắc kè");
+            jsonGoc.put("input", jsonInput);
+
+            // Nhóm dữ liệu đầu ra kết quả (output)
+            JSONObject jsonOutput = new JSONObject();
+            jsonOutput.put("ketluan", ketLuan);
+            jsonOutput.put("abc", "xyz");
+            jsonOutput.put("nghiem", nghiem);
+            jsonGoc.put("output", jsonOutput);
+
+            // Thực thi gửi gói tin mạng JSON lên Server qua thư viện Volley
+            guiDuLieuLenServer(jsonGoc);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void guiDuLieuLenServer(JSONObject thamSoJson) {
+        String urlApi = "https://k58kmt.tdh.io.vn/api";
+        RequestQueue hangDoiMang = Volley.newRequestQueue(this);
+
+        JsonObjectRequest yeuCauJson = new JsonObjectRequest(Request.Method.POST, urlApi, thamSoJson,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject phanHoi) {
+                        try {
+                            // Tiếp nhận và bóc tách dữ liệu JSON nhận về từ Server thầy
+                            int trangThaiOk = phanHoi.getInt("ok");
+                            int soThuTuStt = phanHoi.getInt("stt");
+
+                            Toast.makeText(GiaiToanActivity.this, 
+                                    "Gửi API thành công! STT nhận về: " + soThuTuStt, 
+                                    Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        Toast.makeText(GiaiToanActivity.this, "Lỗi kết nối hoặc sai cấu hình gọi API!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        hangDoiMang.add(yeuCauJson);
+    }
+}
+
+```
+
+## MÀN HÌNH 3: WEB-VIEW TRUY CẬP TRANG WEB 
+Màn hình này sử dụng đối tượng WebView để nhúng trực tiếp trang web chấm điểm/quản lý của hệ thống bộ môn kèm theo tham số mã sinh viên của bạn.File giao diện (activity_web_view.xml): Mở file trong mục res/layout dán đè đoạn này:
+```XML
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <WebView
+        android:id="@+id/wvHeThong"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</RelativeLayout>
+```
+File xử lý (WebViewActivity.java): Sửa lại mã để WebView kích hoạt Javascript và tải trang web tự động:Javapackage com.example.baitaplonmobile;
+```
+import android.os.Bundle;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class WebViewActivity extends AppCompatActivity {
+
+    private WebView wvHeThong;
+    private final String MA_SV = "K225480106050"; // Điền chính xác mã sinh viên của bạn vào đây
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_web_view);
+
+        wvHeThong = findViewById(R.id.wvHeThong);
+
+        // Cấu hình WebView chuẩn để mở web ngay trong nội tại ứng dụng không bị văng ra trình duyệt ngoài
+        wvHeThong.setWebViewClient(new WebViewClient());
+        
+        WebSettings caiDatWeb = wvHeThong.getSettings();
+        caiDatWeb.setJavaScriptEnabled(true); // Kích hoạt thực thi mã biên dịch Javascript của trang đích
+
+        // Khởi tạo chuỗi định dạng URL kèm theo tham số nhận diện mã sinh viên động
+        String linkCuaThay = "https://k58kmt.tdh.io.vn?masv=" + MA_SV;
+        wvHeThong.loadUrl(linkCuaThay);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // Thuật toán tối ưu trải nghiệm: Cho phép WebView lùi trang lịch sử thay vì thoát thẳng Activity
+        if (wvHeThong.canGoBack()) {
+            wvHeThong.goBack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+}
+```
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/649f9b4d-577e-4bdb-b900-ecb248f7fb52" />
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/8a495696-a16d-4fd9-95db-9c58097d9459" />
+
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/22e66b5a-2468-40a4-838b-03b39c776056" />
